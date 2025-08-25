@@ -8,17 +8,23 @@ API routing, and application configuration for the multilingual tutoring platfor
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from backend.api.v1.chat import router as chat_router
+from backend.api.v1.health import router as health_router
+from backend.api.v1.metrics import router as metrics_router
+
 
 def create_app() -> FastAPI:
     """
     Create and configure the FastAPI application.
 
-    Sets up the main FastAPI app with middleware and metadata.
-    Includes CORS middleware for cross-origin requests.
+    Sets up the main FastAPI app with middleware, routing, and metadata.
+    Includes CORS middleware for cross-origin requests and registers
+    all API endpoint routers.
 
     Returns:
         FastAPI: Configured FastAPI application instance.
     """
+    # TODO: Disable /docs and /redoc endpoints in production environment
     app = FastAPI(
         title="Multilingual AI Tutor",
         description="AI-powered language coach with real-time conversational practice",
@@ -32,6 +38,10 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    app.include_router(health_router, prefix="/api/v1")
+    app.include_router(chat_router, prefix="/api/v1")
+    app.include_router(metrics_router, prefix="/api/v1")
 
     return app
 
