@@ -1,0 +1,20 @@
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+extend-select = [
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "UP",   # pyupgrade
+    "B",    # bugbear
+    "SIM",  # simplify
+    "I",    # isort
+    "N",    # pep8-naming
+    "ANN",  # type annotations (FastAPI)
+    "S",    # security checks
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]  # Allow assert in tests
+"main.py" = ["S104"]  # Allow binding to all interfaces in development
