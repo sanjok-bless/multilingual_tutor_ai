@@ -2,6 +2,8 @@
 
 from fastapi import APIRouter
 
+from backend.dependencies import ConfigDep
+
 router = APIRouter()
 
 
@@ -21,12 +23,11 @@ async def chat_endpoint() -> dict:
 
 
 @router.get("/languages")
-async def get_languages() -> list[str]:
+async def get_languages(config: ConfigDep) -> list[str]:
     """
     Get supported languages for the tutoring platform.
 
     Returns:
         list[str]: List of supported language codes.
     """
-    # TODO: Load supported languages from environment configuration
-    return ["EN"]
+    return config.supported_languages

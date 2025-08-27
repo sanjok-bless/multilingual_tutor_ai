@@ -18,6 +18,6 @@ def test_languages_endpoint(client: TestClient) -> None:
 
     assert response.status_code == 200
     data = response.json()
-    assert data == ["EN"]
+    assert data == ["EN", "UK", "PL", "DE"]
     assert isinstance(data, list)
-    assert len(data) == 1
+    assert len(data) == 4
