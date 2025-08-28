@@ -1,15 +1,15 @@
-"""Common enums used across the application."""
+"""Application enums."""
 
 from enum import StrEnum
 
 
 class Language(StrEnum):
-    """Supported languages for tutoring sessions."""
+    """Supported languages."""
 
     EN = "EN"
     DE = "DE"
     PL = "PL"
-    UK = "UK"
+    UA = "UA"
 
 
 class Level(StrEnum):
@@ -24,7 +24,7 @@ class Level(StrEnum):
 
 
 class ErrorType(StrEnum):
-    """Types of language errors that can be corrected."""
+    """Language error types."""
 
     GRAMMAR = "GRAMMAR"
     VOCABULARY = "VOCABULARY"

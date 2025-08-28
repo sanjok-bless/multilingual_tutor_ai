@@ -1,4 +1,4 @@
-"""Configuration management with Pydantic Settings and .env support."""
+"""Configuration management with Pydantic Settings."""
 
 import json
 from typing import Literal
@@ -13,7 +13,7 @@ Environment = Literal["dev", "prod", "ci"]
 
 
 class AppConfig(BaseSettings):
-    """Application configuration."""
+    """App configuration."""
 
     # Application settings
     environment: Environment = Field(default="dev", description="Environment (dev/prod/ci)")
@@ -27,12 +27,11 @@ class AppConfig(BaseSettings):
 
     # Language settings
     supported_languages: list[str] = Field(
-        default=["EN", "UK", "PL", "DE"], description="List of supported language codes"
+        default=["EN", "UA", "PL", "DE"], description="List of supported language codes"
     )
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
-    # Environment validators
     @field_validator("environment")
     @classmethod
     def validate_environment(cls, v: str) -> str:
@@ -41,7 +40,6 @@ class AppConfig(BaseSettings):
             raise ValueError(f"ENVIRONMENT must be one of {valid_environments}")
         return v
 
-    # OpenAI validators
     @field_validator("openai_api_key")
     @classmethod
     def validate_api_key_format(cls, v: str) -> str:
@@ -63,7 +61,6 @@ class AppConfig(BaseSettings):
             raise ValueError("OPENAI_MAX_TOKENS must be positive")
         return v
 
-    # Language validators
     @field_validator("supported_languages", mode="before")
     @classmethod
     def parse_supported_languages(cls, v: str | list[str]) -> list[str]:
@@ -83,7 +80,6 @@ class AppConfig(BaseSettings):
                 raise ValueError(f"SUPPORTED_LANGUAGES contains unsupported language '{lang}' not in Language enum")
         return v
 
-    # CORS validators
     @field_validator("cors_origins", mode="before")
     @classmethod
     def parse_cors_origins(cls, v: str | list[str]) -> list[str]:

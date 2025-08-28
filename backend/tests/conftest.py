@@ -27,7 +27,7 @@ def mock_config() -> AppConfig:
         "OPENAI_MODEL": "gpt-4o-mini",
         "OPENAI_MAX_TOKENS": "500",
         "OPENAI_TEMPERATURE": "0.7",
-        "SUPPORTED_LANGUAGES": '["EN","UK","PL","DE"]',  # JSON format
+        "SUPPORTED_LANGUAGES": '["EN","UA","PL","DE"]',  # JSON format
         "CORS_ORIGINS": '["http://localhost:8080"]',  # JSON format
     }
 

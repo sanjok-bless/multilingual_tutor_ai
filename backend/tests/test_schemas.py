@@ -23,7 +23,7 @@ class TestLanguageEnum:
         assert Language.EN == "EN"
         assert Language.DE == "DE"
         assert Language.PL == "PL"
-        assert Language.UK == "UK"
+        assert Language.UA == "UA"
 
     def test_invalid_language_code_raises_error(self) -> None:
         """Test invalid language code raises ValidationError."""

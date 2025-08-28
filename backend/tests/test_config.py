@@ -58,7 +58,7 @@ class TestAppConfig:
 OPENAI_TEMPERATURE=0.3
 OPENAI_MAX_TOKENS=300
 ENVIRONMENT=dev
-SUPPORTED_LANGUAGES=["EN","UK"]
+SUPPORTED_LANGUAGES=["EN","UA"]
 """
 
         with tempfile.NamedTemporaryFile(mode="w", suffix=".env", delete=False) as f:
@@ -152,7 +152,7 @@ ENVIRONMENT=ci
     def test_supported_languages_defaults(self) -> None:
         """Test supported languages uses correct default values."""
         config = AppConfig(openai_api_key="sk-test")
-        assert config.supported_languages == ["EN", "UK", "PL", "DE"]
+        assert config.supported_languages == ["EN", "UA", "PL", "DE"]
 
     def test_supported_languages_validates_subset_of_enum(self) -> None:
         """Test supported languages must be subset of Language enum."""
